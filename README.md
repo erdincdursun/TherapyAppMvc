@@ -1,2 +1,2 @@
-# ErdincDursun_BrightProje1
+# ErdincDursun_BrightProje
  
