@@ -1,0 +1,43 @@
+﻿@model CategoryAddViewModel
+
+<div class="mt-2">
+    <h2 class="diplay-6">New Category</h2>
+</div>
+
+
+<div class="d-flex mt-4">
+<form asp-area="Admin" asp-controller="Category" asp-action="Create" method="post">
+    <div class="text-danger" asp-validation-summary="All"></div>
+    <div class="mb-3">
+            <label asp-for="Name"></label>
+            <input asp-for="Name" class="form-control" type="text"
+                   placeholder="Enter the category name." />
+        </div>
+    <div class="mb-3">
+            <label asp-for="Description">Description</label>
+            <input class="form-control" asp-for="Description" type="text"
+                    placeholder="Enter the description..." />  
+    </div>
+    <div class="mb-3 form-check">
+        <input class="form-check-input" asp-for="IsActive" type="checkbox">
+        <label class="form-check-label" for="IsActive">
+            Is Active?
+        </label>
+    </div>
+    <button type="submit" class="btn btn-success">Submit</button>
+    <a asp-area="Admin" asp-controller="Category" asp-action="Index" class="btn btn-warning  btn-block">
+        List All Categories
+    </a>
+
+</form>
+
+</div>
+
+
+
+
+
+
+@section Js{
+    @await Html.PartialAsync("_ValidationScriptsPartial");
+}

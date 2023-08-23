@@ -1,0 +1,51 @@
+13.06.2023
+
+Terapi App : 
+Uygulama Özeti : Psikologların danışmanlık hizmeti verdiği, kullanıcıların uygulamada psikolagları seçebileceği değerlendirebileceği bir uygulama yapacağım. Her bir psikoloğun bir tane branşı olacaktır. Branşlara göre kullanıcılar istemiş oldukları psikolog'dan randevu almak isteyebilir bunun için bir randevu oluşturabilir. Ayrıca kategorilerden de kendisine uygun kategoriyi seçtiğinde ilgili psikologları görüntüleyebilir. Hizmet almış olduğu psikoloğu değerlendirebilir ve yorum yazabilir.
+
+
+
+Uygulamada kullanılacak olan Entityler: 
+
+*advisor
+*branch
+*category
+*advisorCategory
+
+Uygulama veritabanında tablolar arasında sağlanacak ilişkiler: 
+->advisor ile branchlar arasında bire çok ilişki olacak.
+->advisor ile category arasında çoka çok ilişki olacak. Bir advisor'un birden fazla category'de olacak. Bir category birden fazla advisor'de olabilir.
+
+
+Advisor Tablosu               Branch Tablosu         Category Tablosu         advisorCategory
+-Id                          -Id                     -Id                      -Advisor
+-FirstName                   -Name                   -Name		      -Category
+-LastName                    -Url                    -url
+-BranchId                    -IsActive               -IsActive	   
+-About			     -IsDelete               -IsDeleted
+-PhotoUrl		     -CreatedDate            -CreatedDate
+-Price			     -ModifiedDate           -ModifiedDate
+-Education					     -Description
+-Url
+-IsActive
+-IsDeleted
+-CreatedDate
+-ModifiedDate
+
+
+Yapmak istediğim uygulama üzerinde kullanıcağım entityleri belirledim ve oluşacak tabloların birbiriyle olan ilişkilerini de belirledim.
+
+->Bolum1-Proje oluşturma,Katmanlı yapının oluşturulması ve Referansların verilmesi:
+
+*Blank Solution oluşturarak projeme başladım. Daha sonra katmanlı mimari kullanmak istediğim için yeni proje ekleyerek classlib ile önce Entity katmanımı daha sonra Data katmanını, Business katmanı,bunların dışında genel işlemleri yapabileceğim  core katmanı ve uygulamanın ara yüzünü tasarlayacağım MVC katmanını oluşturdum. Katmanlarımın birbiriyle olan iletişimini sağlamak adına Data katmanından Entity katmanına ulaşmak için referans verdim. Business katmanından, Data katmanına ulaşmak için referans verdim. Mvc katmanından, Business'a ulaşmak için referans verdim. Core katmanını kullanmak içinde MVC-Business ve Data katmanından referansları verdim. Böylece Data Entitye, Business Dataya, Mvc Business' a ulaşarak katmanlar arası iletişimi sağlamış oldum.
+
+->Bolum2-Entity Katmanı: 
+
+*Entity katmanında soyut ve somut classları oluşturmak için Abstract ve Concrete adında 2 adet klasör oluşturdum.Abstract klasöründe BaseEntity classını oluşturdum.BaseEntity soyut classım da entitylerimde kullanacağım ortak propertyleri yazdım.Ve daha sonra concrete geçerek somut olacak entitylerimi yazdım. Burada Base classtan miras alarak içerisinde ayrıca kullanacağım propertyleri yazdım.
+
+->Data Katmanı:
+*Entity katmanında classları tamamladıktan sonra data katmanına geçtim. Burada öncelikle abstract ve concrete klasörlerini oluşturdum. Daha sonra ilk olarak ORM için EntityFrameworkCore paketini terminal üzerinden kurdum. Design paketini ve kullanıcağım sql için Sqlite paketlerinide kurdum. Design paketi ayrıca MVC 'de lazım olacağından oradada kurdum. Gerekli paketleri de kurduktan sonra ilk olarak Concrete üzerinde EfCore adında bir klasör oluşturdum. Burada veritabanımı oluşturacak Context için efcore üzerinden Context adında bir klasör oluşturdum. Daha sonra Context klasörünün içinde projemin veritabanı ile ilgili tabloların oluşturulacağı TherapyAppContext adında bir class oluşturdum. Classı DbContext Classından miras alarak Bu classda veritabanında herbir tabloya karşılık gelecek olan entitylerimin Dbsetleri yazdım.Daha sonra fake datalarım için yine efcore klasörü üzerinde Config dosyası oluşturarak içerisinde ilgili entitylerimin config classlarını yazdım.Config klaslarımı IEntityTypeConfiguration interfaceden miras alarak fake datalarımı yazdım.Sonrasında dbcontext classında yazmış olduğum configleri OnModelCreating override ederek veritabanına yansımasını sağladım. Config işlemlerim bittikten sonra data katmanında terminalden migrations oluşturdum. Yine data katmanında database update yaparak veritabanına verilerim yansıyarak veritabanım oluşmuş oldu. Abstract klasöründe önce interfaceleri concrete klasöründe ise somut classları yazdım. Generic yapı kullanarak ortak metodları burada yazdım ve diğer yazmış olduğum interfaceleri bu generic interfaceden miras aldırdım.Concrete klasöründe somut classları ilgili ınterfacelerden miras aldım. Daha sonra ihtiyaç halinde metotları yazacağım.
+
+->Business Katmanı:
+*Concrete ve Abstract klasörlerini oluşturarak başladım.Data katmanında oluşturduğum repositorylerin soyut ve somut classlarını oluşturdum.MVC katmanına geçerek önce deneme amaçlı bir veri çekeceğim.
+ 

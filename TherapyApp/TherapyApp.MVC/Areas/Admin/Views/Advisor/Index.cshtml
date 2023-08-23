@@ -1,0 +1,104 @@
+﻿@model List<Advisor>
+<div class="row my-2">
+    <div class="col-md-6">
+        <h1 class="display-6">
+            Advisors
+        </h1>
+    </div>
+    <div class="col-md-6 d-flex align-items-center justify-content-end">
+        <a asp-area="Admin"
+           asp-controller="Advisor"
+           asp-action="Create"
+           class="btn btn-success">New Advisor</a>
+    </div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <table id="data-table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Photo</th>
+                    <th>Name Surname</th>
+                    <th>Created Date</th>
+                    <th>Last Change Date</th>
+                    <th>Is Active?</th>
+                    <th>Transactions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var advisor in Model)
+                {
+                    <tr>
+                        <td>@advisor.Id</td>
+                        <td>
+                            <img src="/img/@advisor.PhotoUrl" width="50">
+                        </td>
+                        <td>@advisor.FirstName @advisor.LastName</td>
+                        <td>@advisor.CreatedDate.ToShortDateString()</td>
+                        <td>@advisor.ModifiedDate.ToShortDateString()</td>
+                        <td>
+
+                            <form class="form-check"
+                                  asp-area="Admin"
+                                  asp-controller="Advisor"
+                                  asp-action="UpdateIsActive"
+                                  asp-route-id="@advisor.Id"
+                                  id="form-advisor-is-active-@advisor.Id">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input"
+                                           type="checkbox"
+                                           role="switch"
+                                           id="flexSwitchCheckChecked" @(advisor.IsActive ? "checked" : "")
+                                           onchange="document.getElementById(`form-advisor-is-active-@advisor.Id`).submit();">
+                                </div>
+                            </form>
+
+                        </td>
+                        <td>
+                            <!-- Hard Deleted Button -->
+                            <a class="btn btn-danger btn-sm"
+                               asp-area="Admin"
+                               asp-controller="Author"
+                               asp-action="Delete"
+                               asp-route-id="@advisor.Id">
+                                <i class="fa-solid fa-trash"></i>
+                            </a>
+
+
+                            <!-- Update Button -->
+                            <a class="btn btn-success btn-sm"
+                               asp-area="Admin"
+                               asp-controller="Author"
+                               asp-action="Edit"
+                               asp-route-id="@advisor.Id">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </a>
+
+
+                            <!-- Undo Deleted Button -->
+                            <a class="btn btn-success btn-sm"
+                               asp-area="Admin"
+                               asp-controller="Author"
+                               asp-action="SoftDelete"
+                               asp-route-id="@advisor.Id">
+                                <i class="fa-solid fa-arrow-rotate-left"></i>
+                            </a>
+
+
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Css{
+    @await Html.PartialAsync("_DataTablesStylesPartial")
+}
+
+@section Js{
+    @await Html.PartialAsync("_DataTablesScriptsPartial")
+}

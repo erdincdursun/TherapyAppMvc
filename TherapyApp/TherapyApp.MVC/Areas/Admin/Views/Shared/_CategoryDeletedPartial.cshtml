@@ -1,0 +1,68 @@
+﻿ @model Category
+
+<button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modal-@Model.Id">
+    <i class="fa-solid fa-trash"></i>
+</button>
+
+<div class="modal fade" id="modal-@Model.Id" tabindex="-1" aria-labelledby="modal-label-@Model.Id" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="modal-label-@Model.Id">Deleted Category</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <table class="table">
+                    <tr>
+                        <th>Id:</th>
+                        <td>@Model.Id</td>
+                        <th>Ad:</th>
+                        <td>@Model.Name</td>
+                    </tr>
+                    <tr>
+                        <th>Description:</th>
+                        <td>@Model.Description</td>
+                    </tr>
+                    <tr>
+                        <th>Created Date:</th>
+                        <td>@Model.CreatedDate</td>
+                        <th>Last Modifed Date:</th>
+                        <td>@Model.ModifiedDate</td>
+                    </tr>
+                    <tr>
+                        <th>Is Active?:</th>
+                        <td class="@(Model.IsActive ? "text-success" : "text-danger") fw-bold ">@(Model.IsActive ? "ACTİVE" : "PASSIVE")</td>
+                        <th></th>
+                    </tr>
+                  
+                </table>
+                
+            </div>
+            <div>
+                <p class="text-danger text-center"> @Model.Name The option to permanently delete the category will delete it from the database.</p>
+                <p class="text-warning text-center"> @Model.Name When the option to temporarily delete the category is deleted, it will be thrown into the recycle bin. You can undo it!</p>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal">Give Up</button>
+                <a type="button"
+                   class="btn btn-danger"
+                   asp-area="Admin"
+                   asp-controller="Category"
+                   asp-action="HardDelete"
+                   asp-route-id="@Model.Id">
+                    Permanently delete
+                </a>
+                <a type="button"
+                   class="btn btn-warning"
+                   asp-area="Admin"
+                   asp-controller="Category"
+                   asp-action="SoftDelete"
+                   asp-route-id="@Model.Id">
+                    Temporary Delete
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

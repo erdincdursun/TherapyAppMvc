@@ -1,0 +1,21 @@
+﻿@model Advisor
+
+<section class="py-5 bg-light" id="scroll-target">
+    <div class="container px-5 my-5">
+        <div class="row gx-5 align-items-center">
+            <div class="col-lg-4"><img class="img-fluid rounded mb-5 mb-lg-0" src="/img/@Model.PhotoUrl" alt="..." /></div>
+            <div class="col-lg-6">
+                <h2 class="fw-bolder">@Model.FirstName @Model.LastName</h2>
+                <p class="lead fw-normal text-muted mb-0">@Model.Education</p>
+                <hr/>
+                <p class="lead fw-normal text-muted mb-2">@Model.About</p>
+                <p class="lead fw-normal text-muted mb-0"><span class="text-success">Price:@Model.Price $</span></p>
+
+                <a class="btn btn-success mt-3" asp-area="" asp-controller="Advisor" asp-action="Appointment">Make An Appointment</a>
+                <a asp-area="" asp-controller="Advisor" asp-action="Question" asp-route-id="@Model.Id" class="btn btn-warning mt-3">Ask Question</a>
+
+            </div>
+        
+        </div>
+    </div>
+</section>

@@ -1,0 +1,103 @@
+﻿@model RegisterViewModel 
+<section class="text-center text-lg-start">
+        <div class="container py-4">
+        <div class="row g-0 align-items-center">
+            <div class="col-lg-6 mb-5 mb-lg-0">
+                <div class="card cascading-right" style="
+            background: hsla(0, 0%, 100%, 0.55);
+            backdrop-filter: blur(30px);
+            ">
+                    <div class="card-body p-5 shadow-5 text-center">
+                        <h2 class="fw-bold mb-5"><i class="fa-regular fa-address-card" style="color: #67a013;"></i> Register</h2>
+                        <form asp-area="" asp-controller="Account" asp-action="Register" method="post">
+                            <div class="row">
+                                <div class="col-md-6 mb-4">
+                                    <div class="form-outline">
+                                        <label class="form-label" asp-for="FirstName"></label>
+                                        <input type="text" id="form3Example1" class="form-control" asp-for="FirstName" />
+                                        <span class="text-danger" asp-validation-for="FirstName"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <div class="form-outline">
+                                        <label class="form-label" asp-for="LastName"></label>
+                                        <input type="text" id="form3Example1" class="form-control" asp-for="LastName" />
+                                        <span class="text-danger" asp-validation-for="LastName"></span>
+                                    </div>
+                                </div>
+                               
+                            </div>
+                            <!-- UserName input -->
+                            <div class="form-outline mb-4">
+                                <div class="form-outline">
+                                    <label class="form-label" asp-for="UserName"></label>
+                                    <input type="text" id="form3Example1" class="form-control" asp-for="UserName" />
+                                    <span class="text-danger" asp-validation-for="UserName"></span>
+                                </div>
+                            </div>
+                            <!-- Email input -->
+                            <div class="form-outline mb-4">
+                                <label class="form-label" asp-for="Email"></label>
+                                <input type="email" id="form3Example3" class="form-control" asp-for="Email" />
+                                <span class="text-danger" asp-validation-for="Email"></span>
+                                
+                            </div>
+
+                            <!-- Password input -->
+                            <div class="row">
+                                <div class="col-md-6 mb-4">
+                                <label class="form-label" asp-for="Password"></label>
+                                <input type="password" asp-for="Password" class="form-control" />
+                                    <span class="text-danger" asp-validation-for="Password"></span>
+                               
+                            </div>
+                                <div class="col-md-6 mb-4">
+                                <label class="form-label" asp-for="RePassword"></label>
+                                <input type="password" asp-for="RePassword" class="form-control" />
+                                    <span class="text-danger" asp-validation-for="Password"></span>
+                            </div>
+                            </div>
+                            <!-- Checkbox -->
+                            <div class="form-check d-flex justify-content-center mb-4">
+                                <input class="form-check-input me-2" type="checkbox" value="" id="form2Example33" checked />
+                                <label class="form-check-label" for="form2Example33">
+                                    Subscribe to our newsletter
+                                </label>
+                            </div>
+
+                            <!-- Submit button -->
+                            <button type="submit" class="btn btn-success btn-block mb-4">
+                               <i class="fa-solid fa-id-card"></i> Register
+                            </button>
+
+                            <!-- Register buttons -->
+                            <div class="text-center">
+                                <p>or sign up with:</p>
+                                <button type="button" class="btn btn-link btn-floating mx-1">
+                                    <i class="fab fa-facebook-f"></i>
+                                </button>
+
+                                <button type="button" class="btn btn-link btn-floating mx-1">
+                                    <i class="fab fa-google"></i>
+                                </button>
+
+                                <button type="button" class="btn btn-link btn-floating mx-1">
+                                    <i class="fab fa-twitter"></i>
+                                </button>
+
+                                <button type="button" class="btn btn-link btn-floating mx-1">
+                                    <i class="fab fa-github"></i>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6 mb-5 mb-lg-0">
+                <img src="/img/signup.jpg" class="w-100 rounded-4 shadow-4"
+                     alt="" />
+            </div>
+        </div>
+    </div>
+ </section>

@@ -1,0 +1,89 @@
+﻿@model List<Branch>
+<div class="row my-2">
+    <div class="col-md-6">
+        <h1 class="display-6">
+            Branches
+        </h1>
+    </div>
+
+    <div class="col-md-6 d-flex align-items-center justify-content-end">
+        <a asp-area="Admin"
+           asp-controller="Branch"
+           asp-action="Create"
+           class="btn btn-success">New Branch</a>
+    </div>
+
+
+
+    <div class="card mb-4">
+        <div class="card-body">
+            <table id="data-table">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th width="100">Created Date</th>
+                        <th width="135">Last Change Date</th>
+                        <th>Is Active</th>
+                        <th>Transactions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var branch in Model)
+                    {
+                        <tr>
+                            <td>@branch.Id</td>
+                            <td>@branch.Name</td>
+
+                            <td>@branch.CreatedDate.ToShortDateString()</td>
+                            <td>@branch.ModifiedDate.ToShortDateString()</td>
+                            <td>
+
+                                <form class="form-check"
+                                      asp-area="Admin"
+                                      asp-controller="Branch"
+                                      asp-action="UpdateIsActive"
+                                      asp-route-id="@branch.Id"
+                                      id="form-branch-is-active-@branch.Id">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input"
+                                               type="checkbox"
+                                               role="switch"
+                                               id="flexSwitchCheckChecked" @(branch.IsActive ? "checked" : "")
+                                               onchange="document.getElementById(`form-branch-is-active-@branch.Id`).submit();">
+                                    </div>
+                                </form>
+
+
+                            </td>
+                            <td>
+                                <!--Deleted Button -->
+                            @await Html.PartialAsync("_BranchDeletedPartial",branch)
+
+                                <!-- Update Button -->
+                                <a class="btn btn-success btn-sm"
+                                   asp-area="Admin"
+                                   asp-controller="Branch"
+                                   asp-action="Update"
+                                   asp-route-id="@branch.Id">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                </a>
+
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+    @section Css{
+        @await Html.PartialAsync("_DataTablesStylesPartial")
+    }
+
+    @section Js{
+        @await Html.PartialAsync("_DataTablesScriptsPartial")
+    }

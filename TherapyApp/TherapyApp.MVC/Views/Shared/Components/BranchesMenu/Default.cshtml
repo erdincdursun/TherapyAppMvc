@@ -1,0 +1,17 @@
+﻿@model List<Branch>
+<div class="list-group mt-4">
+    <a class="list-group-item list-group-item-action active bg-success"
+       asp-area=""
+       asp-controller="Advisor"
+       asp-action="AdvisorList"
+       asp-route-categoryurl=""
+       asp-route-brancherurl="">All Branchers</a>
+    @foreach (var branches in Model)
+    {
+        <a class="list-group-item list-group-item-action"
+           asp-area=""
+           asp-controller="Advisor"
+           asp-action="AdvisorList"
+           asp-route-brancherurl="@branches.Url">@branches.Name</a>
+    }
+</div>
